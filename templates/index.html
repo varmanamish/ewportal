@@ -64,14 +64,21 @@
                         <li class="menu-active"><a href="{% url 'index' %}">Home</a></li>
                         <li><a href="{% url 'doctors' %}">Doctors & Therapists</a></li>
                         <li><a href="{% url 'chatbot' %}">EWP mega</a></li>
-                        <li><a href="{% url 'departments' %}">Take an Appointment</a></li>
+                        <li><a href="{% url 'departments' %}">Appointment</a></li>
+                        {% if user.is_authenticated %}
+                        <li><a href="{% url 'logout' %}">logout</a></li>
+                        {% else %}
                         <li class="menu-has-children"><a href="">login</a>
                             <ul>
                                 <li><a href="{% url 'login' %}">login</a></li>
-                                <li><a href="{% url 'elements' %}">elements</a></li>
+                                <li><a href="{% url 'register' %}">register</a></li>
                             </ul>
                         </li>
-                        <li><a href="{% url 'contact' %}">Contact Us</a></li>			          				          
+                        {% endif %}		
+                        <li><a href="{% url 'contact' %}">Contact Us</a></li>
+                        {% if user.is_authenticated %}
+                        <li><a href="{% url 'profile' %}">profile</a></li>
+                        {% endif %}			          				          
                     </ul>
                 </nav><!-- #nav-menu-container -->		    		
                 </div>
