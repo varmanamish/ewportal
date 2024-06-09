@@ -1,68 +1,481 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Travello</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< Updated upstream
+    <title>Login Form</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #00e6ee;
+}
+
+::selection {
+    color: #fff;
+    background: #53f0e3;
+}
+
+.wrapper {
+    width: 380px;
+    padding: 40px 30px 50px 30px;
+    background: #fff;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+.wrapper header {
+    font-size: 35px;
+    font-weight: 600;
+}
+
+.wrapper form {
+    margin: 40px 0;
+}
+
+form .field {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+form .field.shake {
+    animation: shake 0.3s ease-in-out;
+}
+
+@keyframes shake {
+    0%,
+    100% {
+        margin-left: 0px;
+    }
+    20%,
+    80% {
+        margin-left: -12px;
+    }
+    40%,
+    60% {
+        margin-left: 12px;
+    }
+}
+
+form .field .input-area {
+    height: 50px;
+    width: 100%;
+    position: relative;
+}
+
+form input {
+    width: 100%;
+    height: 100%;
+    outline: none;
+    padding: 0 45px;
+    font-size: 18px;
+    background: none;
+    caret-color: #5372F0;
+    border-radius: 5px;
+    border: 1px solid #bfbfbf;
+    border-bottom-width: 2px;
+    transition: all 0.2s ease;
+}
+
+form .field input:focus,
+form .field.valid input {
+    border-color: #5372F0;
+}
+
+form .field.shake input,
+form .field.error input {
+    border-color: #dc3545;
+}
+
+.field .input-area i {
+    position: absolute;
+    top: 50%;
+    font-size: 18px;
+    pointer-events: none;
+    transform: translateY(-50%);
+}
+
+.input-area .icon {
+    left: 15px;
+    color: #bfbfbf;
+    transition: color 0.2s ease;
+}
+
+.input-area .error-icon {
+    right: 15px;
+    color: #dc3545;
+}
+
+form input:focus~.icon,
+form .field.valid .icon {
+    color: #5372F0;
+}
+
+form .field.shake input:focus~.icon,
+form .field.error input:focus~.icon {
+    color: #bfbfbf;
+}
+
+form input::placeholder {
+    color: #bfbfbf;
+    font-size: 17px;
+}
+
+form .field .error-txt {
+    color: #dc3545;
+    text-align: left;
+    margin-top: 5px;
+}
+
+form .field .error {
+    display: none;
+}
+
+form .field.shake .error,
+form .field.error .error {
+    display: block;
+}
+
+form .pass-txt {
+    text-align: left;
+    margin-top: -10px;
+}
+
+.wrapper a {
+    color: #5372F0;
+    text-decoration: none;
+}
+
+.wrapper a:hover {
+    text-decoration: underline;
+}
+
+form input[type="submit"] {
+    height: 50px;
+    margin-top: 30px;
+    color: #fff;
+    padding: 0;
+    border: none;
+    background: #5372F0;
+    cursor: pointer;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+form input[type="submit"]:hover {
+    background: #2c52ed;
+}
+=======
     <link rel="stylesheet" href="{% static 'assets/css/login.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        html {
+            height: 100%;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            background: linear-gradient(#141e30, #243b55);
+        }
+        .login-box {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            padding: 40px;
+            width: 400px;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.5);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+            box-sizing: border-box;
+            border-radius: 10px;
+        }
+        .login-box h2 {
+            margin: 0 0 30px;
+            padding: 0;
+            color: #fff;
+            text-align: center;
+        }
+        .login-box .user-box {
+            position: relative;
+        }
+        .login-box .user-box input {
+            width: 100%;
+            padding: 10px 0;
+            font-size: 16px;
+            color: #fff;
+            margin-bottom: 30px;
+            border: none;
+            border-bottom: 1px solid #fff;
+            outline: none;
+            background: transparent;
+        }
+        .login-box .user-box label {
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 10px 0;
+            font-size: 16px;
+            color: #fff;
+            pointer-events: none;
+            transition: 0.5s;
+        }
+        .login-box .user-box input:focus ~ label,
+        .login-box .user-box input:valid ~ label {
+            top: -20px;
+            left: 0;
+            color: #03e9f4;
+            font-size: 12px;
+        }
+        .login-box form a {
+            position: relative;
+            display: inline-block;
+            padding: 10px 20px;
+            color: #03e9f4;
+            font-size: 16px;
+            text-decoration: none;
+            text-transform: uppercase;
+            overflow: hidden;
+            transition: 0.5s;
+            margin-top: 40px;
+            letter-spacing: 4px;
+        }
+        .login-box a:hover {
+            background: #03e9f4;
+            color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 5px #03e9f4, 0 0 25px #03e9f4, 0 0 50px #03e9f4,
+              0 0 100px #03e9f4;
+        }
+        .login-box a span {
+            position: absolute;
+            display: block;
+        }
+        .login-box a span:nth-child(1) {
+            top: 0;
+
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #03e9f4);
+            animation: btn-anim1 1s linear infinite;
+        }
+        @keyframes btn-anim1 {
+            0% {
+                left: -100%;
+            }
+            50%,
+            100% {
+                left: 100%;
+            }
+        }
+
+        .login-box a span:nth-child(2) {
+            right: 0;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(180deg, transparent, #03e9f4);
+            animation: btn-anim2 1s linear infinite;
+            animation-delay: 0.25s;
+        }
+        @keyframes btn-anim2 {
+            0% {
+                top: -100%;
+            }
+            50%,
+            100% {
+                top: 100%;
+            }
+        }
+        .login-box a span:nth-child(3) {
+            bottom: 0;
+
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(270deg, transparent, #03e9f4);
+            animation: btn-anim3 1s linear infinite;
+            animation-delay: 0.5s;
+        }
+        @keyframes btn-anim3 {
+            0% {
+                right: -100%;
+            }
+            50%,
+            100% {
+                right: 100%;
+            }
+        }
+        .login-box a span:nth-child(4) {
+            left: 0;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(360deg, transparent, #03e9f4);
+            animation: btn-anim4 1s linear infinite;
+            animation-delay: 0.75s;
+        }
+        @keyframes btn-anim4 {
+            0% {
+                bottom: -100%;
+            }
+            50%,
+            100% {
+                bottom: 100%;
+            }
+        }
+>>>>>>> Stashed changes
+    </style>
 </head>
+
 <body>
-    <section class="form-container" style="height: 560px !important;">
+<<<<<<< Updated upstream
+    <div class="wrapper">
+        <header>Login Form</header>
+        <form action="#">
+            <div class="field email">
+                <div class="input-area">
+                    <input type="text" placeholder="Email Address">
+                    <i class="icon fas fa-envelope"></i>
+                    <i class="error error-icon fas fa-exclamation-circle"></i>
+                </div>
+                <div class="error error-txt">Email can't be blank</div>
+=======
+    <div class="login-box">
+        <h2>Login</h2>
         <form action="login" method="post">
             {% csrf_token %}
-            <div class="form1">
-                <div class="rowdir">
-                    <label>User Name</label>
-                    <input type="text" name="username"><br>
-                </div>
-                <div class="rowdir">
-                    <label>Password</label>
-                    <input type="password" name="password"><br>
-                </div>
-               
-                <div class="rowdir">
-                    <input class="button-29" type="submit">
-                </div>
-                <p>Not registerd <a href="{% url 'register' %}">register</a></p>
+            <div class="user-box">
+                <input type="text" name="username" required="">
+                <label>Username</label>
             </div>
+            <div class="user-box">
+                <input type="password" name="password" required="">
+                <label>Password</label>
+            </div>
+            <div>
+                <a href="#" onclick="document.forms[0].submit()">
+                    Submit <span></span><span></span><span></span><span></span>
+                </a>
+            </div>
+            <div class="d-flex flex-row">
+                <p style="color: #fff;margin-top: 50px">Not registered?</p>
+                <p style="color: #fff;"> <a href="{% url 'register' %}">Register</a></p>
+>>>>>>> Stashed changes
+            </div>
+            <div class="field password">
+                <div class="input-area">
+                    <input type="password" placeholder="Password">
+                    <i class="icon fas fa-lock"></i>
+                    <i class="error error-icon fas fa-exclamation-circle"></i>
+                </div>
+                <div class="error error-txt">Password can't be blank</div>
+            </div>
+            <div class="pass-txt"><a href="#">Forgot password?</a></div>
+            <input type="submit" value="Login">
         </form>
-    </section>
+<<<<<<< Updated upstream
+        <div class="sign-txt">Not yet member? <a href="#">Signup now</a></div>
+    </div>
 
-    <!-- Popup container -->
+    <script src="script.js"></script>
+
+=======
+    </div>
+
     {% if messages %}
     <dialog id="dial" open="true">
         <div class="popup" id="myPopup">
             <div class="popup-content">
                 <span class="close" onclick="closePopup()">×</span>
-                <p id="popup-message">
+                <p id="popup-message"></p>
             </div>
         </div>
     </dialog>
     {% endif %}
-        
+
     <script>
-        // Function to close the popup
         function closePopup() {
             document.getElementById("myPopup").style.display = "none";
-            document.getElementById("dial").open=false;
+            document.getElementById("dial").open = false;
         }
 
-        // Function to show the popup with a specific message
         function showPopup(message) {
             document.getElementById("popup-message").textContent = message;
             document.getElementById("myPopup").style.display = "block";
         }
-        
-
     </script>
     {% if messages %}
-            {% for message in messages %}
-            <script>
-                showPopup("{{ message }}");
-            </script>
-            {% endfor %}
+        {% for message in messages %}
+        <script>
+            showPopup("{{ message }}");
+        </script>
+        {% endfor %}
     {% endif %}
-
+>>>>>>> Stashed changes
 </body>
+<script>
+    const form = document.querySelector("form");
+eField = form.querySelector(".email"),
+    eInput = eField.querySelector("input"),
+    pField = form.querySelector(".password"),
+    pInput = pField.querySelector("input");
+
+form.onsubmit = (e) => {
+    e.preventDefault();
+
+    (eInput.value == "") ? eField.classList.add("shake", "error"): checkEmail();
+    (pInput.value == "") ? pField.classList.add("shake", "error"): checkPass();
+
+    setTimeout(() => {
+        eField.classList.remove("shake");
+        pField.classList.remove("shake");
+    }, 500);
+
+    eInput.onkeyup = () => { checkEmail(); }
+    pInput.onkeyup = () => { checkPass(); }
+
+    function checkEmail() {
+        let pattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+        if (!eInput.value.match(pattern)) {
+            eField.classList.add("error");
+            eField.classList.remove("valid");
+            let errorTxt = eField.querySelector(".error-txt");
+
+            (eInput.value != "") ? errorTxt.innerText = "Enter a valid email address": errorTxt.innerText = "Email can't be blank";
+        } else {
+            eField.classList.remove("error");
+            eField.classList.add("valid");
+        }
+    }
+
+    function checkPass() {
+        if (pInput.value == "") {
+            pField.classList.add("error");
+            pField.classList.remove("valid");
+        } else {
+            pField.classList.remove("error");
+            pField.classList.add("valid");
+        }
+    }
+
+    if (!eField.classList.contains("error") && !pField.classList.contains("error")) {
+        window.location.href = form.getAttribute("action");
+    }
+}
+</script>
+
 </html>
