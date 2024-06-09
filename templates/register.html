@@ -1,0 +1,113 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Travello</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'assets/css/login.css' %}">
+</head>
+<body>
+    <section class="form-container">
+        <form action="register" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form1">
+                <div class="rowdir">
+                    <label>First Name</label>
+                    <input type="text" name="first_name" required><br>
+                </div>
+                <div class="rowdir">
+                    <label>Last Name</label>
+                    <input type="text" name="last_name" required><br>
+                </div>
+                <div class="rowdir">
+                    <label>User Name</label>
+                    <input type="text" name="username" required><br>
+                </div>
+                <div class="rowdir">
+                    <label>Email</label>
+                    <input type="email" name="email" required><br>
+                </div>
+                <div class="rowdir">
+                    <label>Image</label>
+                    <input type="file" name="profileimage" required><br>
+                </div>
+                <div class="rowdir">
+                    <label>Password</label>
+                    <input type="password" name="password1" required><br>
+                </div>
+                <div class="rowdir">
+                    <label>Confirm Password</label>
+                    <input type="password" name="password2" required><br>
+                </div>
+                <div class="rowdir">
+                    <label>Are you a Doctor or a Patient?</label>
+                    <select id="userType" name="user_type" onchange="toggleDoctorField()" required>
+                        <option value="patient">Patient</option>
+                        <option value="doctor">Doctor</option>
+                    </select><br>
+                </div>
+                <div class="rowdir" id="doctorTypeField" style="display:none;">
+                    <label>Type of Doctor</label>
+                    <select name="doctor_type" required>
+                        <option value="general">General Practitioner</option>
+                        <option value="cardiologist">Cardiologist</option>
+                        <option value="dermatologist">Dermatologist</option>
+                        <option value="neurologist">Neurologist</option>
+                        <option value="pediatrician">Pediatrician</option>
+                    </select><br>
+                    <label>Years of Experience</label>
+                    <input type="number" name="experience" required><br>
+                    <label>Rating</label>
+                    <input type="number" step="0.1" min="0" max="5" name="rating" required><br>
+                    <label>Availability</label>
+                    <input type="text" name="availability" value="Available" required><br>
+                </div>
+                <div class="rowdir">
+                    <input class="button-29" type="submit" value="Register">
+                </div>
+                <p>Already registered? <a href="{% url 'login' %}">Login</a></p>
+            </div>
+        </form>
+    </section>
+
+    {% if messages %}
+    <dialog id="dial" open="true">
+        <div class="popup" id="myPopup">
+            <div class="popup-content">
+                <span class="close" onclick="closePopup()">×</span>
+                <p id="popup-message"></p>
+            </div>
+        </div>
+    </dialog>
+    {% endif %}
+        
+    <script>
+        function closePopup() {
+            document.getElementById("myPopup").style.display = "none";
+            document.getElementById("dial").open = false;
+        }
+
+        function showPopup(message) {
+            document.getElementById("popup-message").textContent = message;
+            document.getElementById("myPopup").style.display = "block";
+        }
+
+        function toggleDoctorField() {
+            var userType = document.getElementById("userType").value;
+            var doctorTypeField = document.getElementById("doctorTypeField");
+            if (userType === "doctor") {
+                doctorTypeField.style.display = "block";
+            } else {
+                doctorTypeField.style.display = "none";
+            }
+        }
+
+        {% if messages %}
+            {% for message in messages %}
+            showPopup("{{ message }}");
+            {% endfor %}
+        {% endif %}
+    </script>
+</body>
+</html>
