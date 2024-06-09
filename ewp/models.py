@@ -8,9 +8,14 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.user.username
+class DoctorType(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
 class Doctor(models.Model):
     profile = models.OneToOneField(Profile, on_delete=models.CASCADE)
-    doctor_type = models.CharField(max_length=100, blank=True, null=True)
+    doctor_types=models.ManyToManyField(DoctorType, blank=True)
     experience = models.IntegerField(default=0)  
     rating = models.FloatField(default=0.0) 
     availability = models.CharField(max_length=100, default='Available')  

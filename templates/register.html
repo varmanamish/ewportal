@@ -49,13 +49,13 @@
                 </div>
                 <div class="rowdir" id="doctorTypeField" style="display:none;">
                     <label>Type of Doctor</label>
-                    <select name="doctor_type" required>
-                        <option value="general">General Practitioner</option>
-                        <option value="cardiologist">Cardiologist</option>
-                        <option value="dermatologist">Dermatologist</option>
-                        <option value="neurologist">Neurologist</option>
-                        <option value="pediatrician">Pediatrician</option>
-                    </select><br>
+                    <div style="display: flex; flex-wrap:wrap;">
+                        
+                        {% for doctor_type in doctor_types %}
+                        <div style="display: flex; align-items:center; "><input type="checkbox" name="doctor_types" value="{{ doctor_type.id }}"> {{ doctor_type.name }}</div>
+                         
+                        {% endfor %}
+                    </div>
                     <label>Years of Experience</label>
                     <input type="number" name="experience" required><br>
                     <label>Rating</label>
