@@ -42,27 +42,44 @@
                 </div>
                 <div class="rowdir">
                     <label>Are you a Doctor or a Patient?</label>
-                    <select id="userType" name="user_type" onchange="toggleDoctorField()" required>
+                    <select id="userType" name="user_type" onchange="toggleFields()" required>
                         <option value="patient">Patient</option>
                         <option value="doctor">Doctor</option>
                     </select><br>
                 </div>
+                
+                <!-- Doctor Fields -->
                 <div class="rowdir" id="doctorTypeField" style="display:none;">
                     <label>Type of Doctor</label>
                     <div style="display: flex; flex-wrap:wrap;">
-                        
                         {% for doctor_type in doctor_types %}
-                        <div style="display: flex; align-items:center; "><input type="checkbox" name="doctor_types" value="{{ doctor_type.id }}"> {{ doctor_type.name }}</div>
-                         
+                        <div style="display: flex; align-items:center; ">
+                            <input type="checkbox" name="doctor_types" value="{{ doctor_type.id }}"> {{ doctor_type.name }}
+                        </div>
                         {% endfor %}
                     </div>
                     <label>Years of Experience</label>
-                    <input type="number" name="experience" required><br>
+                    <input type="number" name="experience" ><br>
                     <label>Rating</label>
-                    <input type="number" step="0.1" min="0" max="5" name="rating" required><br>
+                    <input type="number" step="0.1" min="0" max="5" name="rating" ><br>
                     <label>Availability</label>
-                    <input type="text" name="availability" value="Available" required><br>
+                    <input type="text" name="availability" value="Available" ><br>
                 </div>
+                
+                <!-- Patient Fields -->
+                <div class="rowdir" id="patientFields" style="display:none;">
+                    <label>Age</label>
+                    <input type="number" name="age" ><br>
+                    <label>Gender</label>
+                    <select name="gender" >
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select><br>
+                    <label>Previous Diseases</label>
+                    <textarea name="previous_diseases" rows="3"></textarea><br>
+                </div>
+                
                 <div class="rowdir">
                     <input class="button-29" type="submit" value="Register">
                 </div>
@@ -93,13 +110,17 @@
             document.getElementById("myPopup").style.display = "block";
         }
 
-        function toggleDoctorField() {
+        function toggleFields() {
             var userType = document.getElementById("userType").value;
             var doctorTypeField = document.getElementById("doctorTypeField");
+            var patientFields = document.getElementById("patientFields");
+            
             if (userType === "doctor") {
                 doctorTypeField.style.display = "block";
+                patientFields.style.display = "none";
             } else {
                 doctorTypeField.style.display = "none";
+                patientFields.style.display = "block";
             }
         }
 

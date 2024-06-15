@@ -21,6 +21,32 @@
     <link rel="stylesheet" href="{% static 'assets/css/jquery.datetimepicker.min.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/linearicons.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <!-- Include jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Include jQuery UI -->
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+<!-- Include jQuery UI Timepicker addon -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.min.js"></script>
+
+<script>
+    $(function() {
+        $('#time').timepicker({
+            timeFormat: 'h:mm p',
+            interval: 15,
+            minTime: '8:00am',
+            maxTime: '6:00pm',
+            startTime: '8:00am',
+            dynamic: false,
+            dropdown: true,
+            scrollbar: true
+        });
+    });
+</script>
+
 </head>
 <body>
     <!-- Preloader Starts -->
@@ -91,6 +117,94 @@
             </div>
         </div>
     </section>
+    <div class="col-lg-5 offset-lg-1 align-self-center">
+        <div class="appointment-form text-center mt-5 mt-lg-0">
+            <h3 class="mb-5">ML INPUTS</h3>
+            <form action="chatbot" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input type="text" name="disease_name" placeholder="disease Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'disease Name'" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="age" placeholder="age" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Your age'" required> 
+                </div>
+                <div>
+                    <div style="display:flex; justify-content:space-between; flex-direction:row;">
+                        <label>Gender</label>
+                    <select id="gender" name="gender" placeholder="Gender" required>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                    </div>
+                </div>
+                <input class="template-btn" type="submit" value="Find now">
+            </form>
+        </div>
+    </div>
+    {% if doctors %}
+            <h1>Doctors for {{ disease_name }}</h1>
+        
+            <ul>
+                {% for doctor in doctors %}
+                    <li>
+                        <h2>{{ doctor.profile.user.first_name }} {{ doctor.profile.user.last_name }}</h2>
+                        <p>Experience: {{ doctor.experience }} years</p>
+                        <p>Rating: {{ doctor.rating }}</p>
+                        <p>Availability: {{ doctor.availability }}</p>
+                    </li>
+                    <div class="col-lg-5">
+                        <div class="single-patient mb-4">
+                            <img src="{{ doctor.profile.img.url }}" style="height:200px !important; width: 300px !important;" alt="">
+                            <h3>{{ doctor.profile.user.first_name }} {{ doctor.profile.user.last_name }}</h3>
+                            <h5></h5>
+                            <p class="pt-3"> 
+                                {% for doctor_type in doctor.doctor_types.all %}
+                                {{ doctor_type.name }}
+                                {% if not forloop.last %}, 
+                                {% endif %}
+                                {% endfor %}
+                                <br>
+                                {{ doctor.experience }} Years Of Experience</p>
+                            <br><p>Availability: {{ doctor.availability }}</p>
+                            <a href="{% url 'appointment' %}?doctor_id={{ doctor.id }}&disease_name={{ disease_name }}">Schedule Appointment</a>
+                        </div>
+                        <div class="single-patient">
+                            <img src="{% static 'assets/images/doctor6.jpg' %}" >
+                            <h3>Dr. Arshad Punjani</h3>
+                            <h5>Sr. Consultant Physician and Diabetologist</h5>
+                            <p class="pt-3">MBBS, MD, FCCP (USA)<br>19 Years Of Experience</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </ul>
+           <a href="{% url 'appointment' %}"><button>Book Appointment</button></a>
+            {% endif %}
+
+            {% if treatment %}
+            <h1>Treatments for {{ disease_name }}</h1>
+           
+        <ul>
+   
+        <li>
+            <h2>{{ treatment.doctor_type }}</h2>
+            <p><strong>Age Range:</strong> {{ treatment.age_min }} - {{ treatment.age_max }}</p>
+            <p><strong>Gender:</strong> {{ treatment.gender }}</p>
+            <p><strong>Treatment:</strong> {{ treatment.treatment }}</p>
+            <p><strong>Medication:</strong> {{ treatment.medication }}</p>
+        </li>
+        </ul>
+        {% endif %} 
+        {% if message %}
+        <script>
+            alert("{{ message }}");
+        </script>
+        {% endif %} i
+        {% if success %}
+        <script>
+            alert("{{ success }}");
+        </script>
+            
+        {% endif %} 
     <!-- Banner Area End -->
 
     <!-- Specialist Area Starts
