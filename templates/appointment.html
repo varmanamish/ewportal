@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Appointment</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'assets/css/login.css' %}">
+</head>
+<body>
+    {%if message%}
+    <script>
+        alert("{{message}}");
+    </script>
+    {% endif %}
+    <section class="form-container">
+        <form action="appointment" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form1">
+                <div class="rowdir">
+                    <label for="appointment_date" class="form-label">Appointment Date & time</label>
+                <input type="datetime-local" id="appointment_date" name="appointment_date" class="form-control" required>
+                </div>
+                <div class="rowdir">
+                    <label for="reason_for_visit" class="form-label">Reason for Visit</label>
+                <textarea id="reason_for_visit" name="reason_for_visit" class="form-control" rows="3" required></textarea>
+                </div>
+                <div class="rowdir">
+                    <label> Doctor name : {{ doctor.profile.user.first_name }} {{ doctor.profile.user.last_name }}</label>
+                    <input type="hidden" name="doctor" value="{{ doctor.id }}">
+                </div>
+                <div class="rowdir">
+                    <input type="submit" value="BOOK NOW">
+                </div>
+        </form>
+    </section>
+
+    {% if messages %}
+    <dialog id="dial" open="true">
+        <div class="popup" id="myPopup">
+            <div class="popup-content">
+                <span class="close" onclick="closePopup()">×</span>
+                <p id="popup-message"></p>
+            </div>
+        </div>
+    </dialog>
+    {% endif %}
+    <script>
+        function closePopup() {
+            document.getElementById("myPopup").style.display = "none";
+            document.getElementById("dial").open = false;
+        }
+
+        function showPopup(message) {
+            document.getElementById("popup-message").textContent = message;
+            document.getElementById("myPopup").style.display = "block";
+        }
+
+        {% if messages %}
+            {% for message in messages %}
+            showPopup("{{ message }}");
+            {% endfor %}
+        {% endif %}
+    </script>
+</body>
+</html>
